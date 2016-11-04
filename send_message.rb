@@ -1,14 +1,9 @@
 require 'aws-sdk'
+require 'yaml'
 
+config = YAML.load_file('aws/credentials.yml')
 
-Aws.config.update({
-  :access_key_id => "x",
-  :secret_access_key => "y",
-  :region => "localhost",
-  :sqs => {
-  	:endpoint=>"http://localhost:9324"
-  }
-	})
+Aws.config.update(config['test'])
 
 sqs = Aws::SQS::Client.new()
 
@@ -21,6 +16,8 @@ res = sqs.create_queue(queue_name:queue_name)
 if res['queue_url']
 
 	queue_url = res['queue_url']
+
+	p 'Create queue success'
 
 else
 

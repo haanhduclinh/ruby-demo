@@ -1,14 +1,10 @@
 require 'aws-sdk'
 
+require 'yaml'
 
-Aws.config.update({
-  :access_key_id => "x",
-  :secret_access_key => "y",
-  :region => "localhost",
-  :sqs => {
-  	:endpoint=>"http://localhost:9324"
-  }
-	})
+config = YAML.load_file('aws/credentials.yml')
+
+Aws.config.update(config['test'])
 
 sqs = Aws::SQS::Client.new
 
