@@ -1,4 +1,3 @@
-# ruby-demo
 # connect with Elastic MQ / already for SQS
 - send_message
 - get_message
